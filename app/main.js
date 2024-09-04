@@ -1,18 +1,20 @@
 function matchPattern(inputLine, pattern) {
+  let regex;
+
+  // Handle single character match or specific regex patterns
   if (pattern.length === 1) {
     return inputLine.includes(pattern);
   } else if (pattern === "\\d") {
-    const regex = new RegExp(pattern);
-    return regex.test(inputLine);
+    regex = /\d/; // Matches any digit
   } else if (pattern === "\\w") {
-    const regex = new RegExp(pattern);
-    return regex.test(inputLine);
+    regex = /\w/; // Matches any word character (alphanumeric + underscore)
   } else if (pattern.startsWith("[") && pattern.endsWith("]")) {
-    const regex = new RegExp(pattern);
-    return regex.test(inputLine);
+    regex = new RegExp(pattern); // Handles character sets like [a-z]
   } else {
-    throw new Error(`Unhandled pattern ${pattern}`);
+    regex = new RegExp(pattern); // Assume it's a valid regex pattern
   }
+
+  return regex.test(inputLine);
 }
 
 function main() {
@@ -24,10 +26,8 @@ function main() {
     process.exit(1);
   }
 
-  // You can use print statements as follows for debugging, they'll be visible when running tests.
   console.log("Logs from your program will appear here");
 
-  // Uncomment this block to pass the first stage
   if (matchPattern(inputLine, pattern)) {
     process.exit(0);
   } else {
