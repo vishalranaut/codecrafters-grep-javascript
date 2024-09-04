@@ -8,8 +8,7 @@ function matchPattern(inputLine, pattern) {
     const regex = new RegExp(pattern);
     return regex.test(inputLine);
   } else if (pattern.startsWith("[") && pattern.endsWith("]")) {
-    let groupPattern = pattern.substring(2, pattern.length - 1);
-    let regex = new RegExp("[^" + groupPattern + "]");
+    const regex = new RegExp(pattern);
     return regex.test(inputLine);
   } else {
     throw new Error(`Unhandled pattern ${pattern}`);
