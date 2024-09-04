@@ -2,7 +2,14 @@ function matchPattern(inputLine, pattern) {
   if (pattern.length === 1) {
     return inputLine.includes(pattern);
   } else if (pattern === "\\d") {
-    return /\d/.test(inputLine);
+    const regex = new RegExp(pattern);
+    return regex.test(inputLine);
+  } else if (pattern === "\\w") {
+    const regex = new RegExp(pattern);
+    return regex.test(inputLine);
+  } else if (pattern.startsWith("[") && pattern.endsWith("]")) {
+    const regex = new RegExp(pattern);
+    return regex.test(inputLine);
   } else {
     throw new Error(`Unhandled pattern ${pattern}`);
   }
